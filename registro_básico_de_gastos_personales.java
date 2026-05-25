@@ -1,44 +1,47 @@
 import java.util.Scanner;
 public class registro_básico_de_gastos_personales {
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        // Crear el Scanner para leer los datos del usuario desde la consola.
         try (Scanner sc = new Scanner(System.in)) {
-            //peticion de nombre
-            System.out.println("ingrese su nombre: ");
+            // Pedir el nombre del usuario.
+            System.out.println("Ingrese su nombre: ");
             String nombre = sc.nextLine();
-            //peticion de los 5 gastos
-            float gasto=0;
-            for (int i=1;i<11;i++){
-                System.out.println("ingrese el valor del producto "+i);
+
+            // Registrar el gasto total acumulado.
+            float gasto = 0;
+
+            // Pedir el precio de 10 productos y sumar los valores.
+            for (int i = 1; i < 11; i++) {
+                System.out.println("Ingrese el valor del producto " + i);
                 float valor = sc.nextFloat();
-                //validacion que ingrese un valor valido
-                if (valor<0){
-                    System.out.println("[!]Error: ingrese un valor valido");
-                    i-=1;
-                }
-                else{
+
+                // Validar que el valor ingresado no sea negativo.
+                if (valor < 0) {
+                    System.out.println("[!] Error: ingrese un valor válido");
+                    i -= 1; // Repetir el mismo producto si el valor es inválido.
+                } else {
                     gasto += valor;
                 }
             }
-            //calculo de promedio gastado
-            float promedio_gastado = gasto/10;
-            //mostrar en pantalla
-            //saludo
-            System.out.println("hola "+nombre+" tu promedio de gasto es de "+promedio_gastado);
-            //condicional
-            //si gasta mas de 100000
-            if (gasto >100000 && gasto>0){
-                System.out.println("Debe revisar sus gastos de la semana. ");
-                System.out.println("total gastado: $"+gasto);
+
+            // Calcular el promedio de gasto por producto.
+            float promedio_gastado = gasto / 10;
+
+            // Mostrar el resultado al usuario.
+            System.out.println("Hola " + nombre + ", tu promedio de gasto es de " + promedio_gastado);
+
+            // Mostrar recomendaciones según el total gastado.
+            if (gasto > 100000 && gasto > 0) {
+                System.out.println("Debe revisar sus gastos de la semana.");
+                System.out.println("Total gastado: $" + gasto);
+            } else if (gasto <= 100000 && gasto > 0) {
+                System.out.println("Sus gastos están controlados.");
+                System.out.println("Total gastado: $" + gasto);
             }
-            //si gasta 100000 o menos 
-            else if(gasto<=100000 && gasto>0){
-                System.out.println("Sus gastos están controlados." );
-                System.out.println("total gastado: $"+gasto);
-            }
-        sc.close();
-    }
-    catch(Exception e){
-            System.out.println("ha ocurrido un error");
+
+        } catch (Exception e) {
+            // Mostrar un mensaje de error si ocurre una excepción al leer datos.
+            System.out.println("Ha ocurrido un error al procesar los gastos.");
         }
     }
 }
